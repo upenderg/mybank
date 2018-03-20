@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        My Bank application
+    </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('myBankApp', []);
+        app.controller('moneyController', function ($scope, $http) {
+            $scope.amountToBeWithdrawn = 578;
+            $scope.postdata = function (amountToBeWithdrawn) {
+                $http.post('/withdraw', amountToBeWithdrawn).then(function (response) {
+                    $scope.msg = response.data.content;
+                }, function (response) {
+                    if(response.status == 400){
+                        $scope.msg = "Please input numbers only";
+                        $scope.statusval = response.status;
+                    }else{
+                        $scope.msg = "Service not available at the moment, please try again later";
+                    }
+
+                });
+            };
+        });
+    </script>
+</head>
+
+<body>
+<div ng-app="myBankApp" ng-controller="moneyController">
+    <div>
+        Enter the Amount to withdraw: <input ng-model="amountToBeWithdrawn"/><br/><br/>
+        <input type="button" value="Send" ng-click="postdata(amountToBeWithdrawn)"/> <br/><br/>
+    </div>
+    <p>{{msg}}</p>
+</div>
+</body>
+</html>
