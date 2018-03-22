@@ -5,7 +5,7 @@
 
     <groupId>com.bank</groupId>
     <artifactId>mybank</artifactId>
-    <version>0.1.6</version>
+    <version>0.1.7</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -52,10 +52,9 @@
 
         <dependency>
             <groupId>net.bull.javamelody</groupId>
-            <artifactId>javamelody-core</artifactId>
-            <version>${javamelody-core.version}</version>
+            <artifactId>javamelody-spring-boot-starter</artifactId>
+            <version>1.71.0</version>
         </dependency>
-
 
         <!-- tag::tests[] -->
         <dependency>
