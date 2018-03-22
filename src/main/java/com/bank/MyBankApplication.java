@@ -10,6 +10,9 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import javax.servlet.Filter;
+import javax.servlet.http.HttpSessionListener;
+
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.Sets.newHashSet;
 
@@ -43,4 +46,15 @@ public class MyBankApplication {
                 .paths(not(PathSelectors.regex("/error*")))
                 .build();
     }
+
+    @Bean
+    public HttpSessionListener javaMelodyListener() {
+        return new net.bull.javamelody.SessionListener();
+    }
+
+    @Bean
+    public Filter javaMelodyFilter() {
+        return new net.bull.javamelody.MonitoringFilter();
+    }
+
 }
